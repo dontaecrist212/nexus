@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXUS — Be Everything Online</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/nexus_style.css">
+</head>
+<body class="dark">
+
+<!-- LANDING -->
+<div id="landing-screen">
+  <nav class="land-nav">
+    <div class="land-logo">NEX<span>US</span></div>
+    <div class="land-nav-right">
+      <button class="theme-toggle" id="theme-toggle-land">🌙</button>
+      <button class="btn btn-ghost" id="land-login-btn">Sign In</button>
+      <button class="btn btn-primary" id="land-register-btn">Join Now</button>
+    </div>
+  </nav>
+  <div class="land-hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-badge">✦ The Social Network Reimagined</div>
+      <h1 class="hero-title">Be <span>Everything</span><br>Online</h1>
+      <p class="hero-sub">Your profile. Your world. Your rules. The social network that combines the best of Twitter, Facebook, and MySpace — with none of the bad parts.</p>
+      <div class="hero-btns">
+        <button class="btn btn-primary btn-lg" id="hero-register-btn">Create Your World →</button>
+        <button class="btn btn-ghost btn-lg" id="hero-login-btn">Sign In</button>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><span>∞</span><label>Connections</label></div>
+        <div class="hero-stat"><span>0</span><label>Algorithms</label></div>
+        <div class="hero-stat"><span>100%</span><label>You</label></div>
+      </div>
+    </div>
+  </div>
+  <div class="land-features">
+    <div class="feat"><div class="feat-icon">🌍</div><div class="feat-title">Worlds</div><div class="feat-desc">Join or create communities around anything you love</div></div>
+    <div class="feat"><div class="feat-icon">👑</div><div class="feat-title">Top 8</div><div class="feat-desc">Bring back the MySpace era — feature your closest people</div></div>
+    <div class="feat"><div class="feat-icon">⚡</div><div class="feat-title">Live Feed</div><div class="feat-desc">Chronological. No algorithm. See everything from everyone you follow</div></div>
+    <div class="feat"><div class="feat-icon">🎨</div><div class="feat-title">Custom Profiles</div><div class="feat-desc">Make your profile yours — colors, themes, personality</div></div>
+    <div class="feat"><div class="feat-icon">📅</div><div class="feat-title">Events</div><div class="feat-desc">Create and discover what's happening in your community</div></div>
+    <div class="feat"><div class="feat-icon">🔍</div><div class="feat-title">Explore</div><div class="feat-desc">Discover posts and people outside your bubble</div></div>
+  </div>
+  <footer class="land-footer">NEXUS · Be Everything Online · © 2026</footer>
+</div>
+
+<!-- AUTH -->
+<div id="auth-screen" class="hidden">
+  <div class="auth-container">
+    <div class="auth-left">
+      <div class="auth-logo">NEX<span>US</span></div>
+      <p class="auth-tagline">Your world starts here.</p>
+    </div>
+    <div class="auth-box">
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="tab-login">Sign In</button>
+        <button class="auth-tab" id="tab-register">Join</button>
+      </div>
+      <div class="auth-error hidden" id="auth-error"></div>
+      <div class="auth-success hidden" id="auth-success"></div>
+      <div id="login-fields">
+        <div class="form-group"><label>Username</label><input type="text" id="auth-username" placeholder="your username" /></div>
+        <div class="form-group"><label>Password</label><input type="password" id="auth-password" placeholder="••••••••" /></div>
+        <button class="btn btn-primary btn-full" id="auth-btn">Sign In</button>
+      </div>
+      <div id="register-fields" class="hidden">
+        <div class="form-group"><label>Display Name</label><input type="text" id="reg-display" placeholder="How you want to be known" /></div>
+        <div class="form-group"><label>Username</label><input type="text" id="reg-username" placeholder="unique username" /></div>
+        <div class="form-group"><label>Password</label><input type="password" id="reg-password" placeholder="min 6 characters" /></div>
+        <button class="btn btn-primary btn-full" id="reg-btn">Create Account</button>
+      </div>
+      <div class="auth-back"><a id="back-to-land">← Back to home</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="app-screen" class="hidden">
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">NEX<span>US</span></div>
+    <nav class="sidebar-nav">
+      <button class="nav-item active" data-page="feed" id="nav-feed">
+        <span class="nav-icon">⚡</span><span class="nav-label">Feed</span>
+      </button>
+      <button class="nav-item" data-page="explore" id="nav-explore">
+        <span class="nav-icon">🔍</span><span class="nav-label">Explore</span>
+      </button>
+      <button class="nav-item" data-page="worlds" id="nav-worlds">
+        <span class="nav-icon">🌍</span><span class="nav-label">Worlds</span>
+      </button>
+      <button class="nav-item" data-page="events" id="nav-events">
+        <span class="nav-icon">📅</span><span class="nav-label">Events</span>
+      </button>
+      <button class="nav-item" data-page="profile" id="nav-profile">
+        <span class="nav-icon">👤</span><span class="nav-label">Profile</span>
+      </button>
+    </nav>
+    <div class="sidebar-bottom">
+      <button class="theme-toggle" id="theme-toggle-app">🌙</button>
+      <button class="btn btn-ghost btn-sm" id="logout-btn">Sign Out</button>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+    <!-- FEED PAGE -->
+    <div class="page active" id="page-feed">
+      <div class="page-header">
+        <h2>Your Feed</h2>
+        <span class="page-sub">Chronological · No Algorithm</span>
+      </div>
+      <div class="composer" id="composer">
+        <div class="composer-avatar" id="composer-avatar">👤</div>
+        <div class="composer-body">
+          <textarea id="post-content" placeholder="What's on your mind?" maxlength="500"></textarea>
+          <div class="composer-footer">
+            <div class="mood-picker">
+              <span class="mood-label">Mood:</span>
+              <div class="mood-options" id="mood-options">
+                <button class="mood-btn active" data-mood="">—</button>
+                <button class="mood-btn" data-mood="😊">😊</button>
+                <button class="mood-btn" data-mood="🔥">🔥</button>
+                <button class="mood-btn" data-mood="💭">💭</button>
+                <button class="mood-btn" data-mood="😤">😤</button>
+                <button class="mood-btn" data-mood="🎉">🎉</button>
+                <button class="mood-btn" data-mood="💀">💀</button>
+                <button class="mood-btn" data-mood="🫶">🫶</button>
+              </div>
+            </div>
+            <div class="composer-right">
+              <span class="char-count" id="char-count">500</span>
+              <button class="btn btn-primary btn-sm" id="post-btn">Post</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="feed-posts"></div>
+    </div>
+
+    <!-- EXPLORE PAGE -->
+    <div class="page hidden" id="page-explore">
+      <div class="page-header">
+        <h2>Explore</h2>
+        <div class="search-bar">
+          <input type="text" id="search-input" placeholder="Search people..." />
+          <button class="btn btn-primary btn-sm" id="search-btn">Search</button>
+        </div>
+      </div>
+      <div id="search-results" class="hidden"></div>
+      <div id="explore-posts"></div>
+    </div>
+
+    <!-- WORLDS PAGE -->
+    <div class="page hidden" id="page-worlds">
+      <div class="page-header">
+        <h2>Worlds</h2>
+        <button class="btn btn-primary btn-sm" id="create-world-btn">+ Create World</button>
+      </div>
+      <div id="worlds-list"></div>
+    </div>
+
+    <!-- EVENTS PAGE -->
+    <div class="page hidden" id="page-events">
+      <div class="page-header">
+        <h2>Events</h2>
+        <button class="btn btn-primary btn-sm" id="create-event-btn">+ Create Event</button>
+      </div>
+      <div id="events-list"></div>
+    </div>
+
+    <!-- PROFILE PAGE -->
+    <div class="page hidden" id="page-profile">
+      <div id="profile-content"></div>
+    </div>
+  </main>
+
+  <!-- RIGHT SIDEBAR -->
+  <aside class="right-sidebar">
+    <div class="widget">
+      <div class="widget-title">Who to Follow</div>
+      <div id="suggested-users"></div>
+    </div>
+    <div class="widget">
+      <div class="widget-title">Active Worlds</div>
+      <div id="sidebar-worlds"></div>
+    </div>
+  </aside>
+</div>
+
+<!-- MODALS -->
+<!-- Create World Modal -->
+<div class="modal-overlay hidden" id="world-modal">
+  <div class="modal">
+    <div class="modal-header"><h3>Create a World</h3><button class="modal-close" id="close-world-modal">✕</button></div>
+    <div class="form-group"><label>World Name</label><input type="text" id="world-name" placeholder="Name your world" /></div>
+    <div class="form-group"><label>Description</label><textarea id="world-desc" placeholder="What's this world about?"></textarea></div>
+    <div class="form-group"><label>Emoji</label><input type="text" id="world-emoji" placeholder="🌍" maxlength="2" /></div>
+    <div class="form-group">
+      <label>Theme Color</label>
+      <div class="color-options" id="world-color-options">
+        <button class="color-dot active" data-color="#6366f1" style="background:#6366f1"></button>
+        <button class="color-dot" data-color="#ec4899" style="background:#ec4899"></button>
+        <button class="color-dot" data-color="#f59e0b" style="background:#f59e0b"></button>
+        <button class="color-dot" data-color="#10b981" style="background:#10b981"></button>
+        <button class="color-dot" data-color="#3b82f6" style="background:#3b82f6"></button>
+        <button class="color-dot" data-color="#ef4444" style="background:#ef4444"></button>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" id="cancel-world-btn">Cancel</button>
+      <button class="btn btn-primary" id="save-world-btn">Create World</button>
+    </div>
+  </div>
+</div>
+
+<!-- Create Event Modal -->
+<div class="modal-overlay hidden" id="event-modal">
+  <div class="modal">
+    <div class="modal-header"><h3>Create an Event</h3><button class="modal-close" id="close-event-modal">✕</button></div>
+    <div class="form-group"><label>Event Title</label><input type="text" id="event-title" placeholder="What's happening?" /></div>
+    <div class="form-group"><label>Description</label><textarea id="event-desc" placeholder="Tell people about it..."></textarea></div>
+    <div class="form-group"><label>Location</label><input type="text" id="event-location" placeholder="Where is it?" /></div>
+    <div class="form-group"><label>Date & Time</label><input type="datetime-local" id="event-date" /></div>
+    <div class="form-group"><label>Emoji</label><input type="text" id="event-emoji" placeholder="📅" maxlength="2" /></div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" id="cancel-event-btn">Cancel</button>
+      <button class="btn btn-primary" id="save-event-btn">Create Event</button>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Profile Modal -->
+<div class="modal-overlay hidden" id="edit-profile-modal">
+  <div class="modal modal-wide">
+    <div class="modal-header"><h3>Edit Profile</h3><button class="modal-close" id="close-edit-profile">✕</button></div>
+    <div class="form-row">
+      <div class="form-group"><label>Display Name</label><input type="text" id="edit-display-name" /></div>
+      <div class="form-group"><label>Avatar Emoji</label><input type="text" id="edit-avatar" maxlength="2" /></div>
+    </div>
+    <div class="form-group"><label>Bio</label><textarea id="edit-bio" placeholder="Tell people about yourself..." maxlength="200"></textarea></div>
+    <div class="form-row">
+      <div class="form-group"><label>Location</label><input type="text" id="edit-location" placeholder="Where are you?" /></div>
+      <div class="form-group"><label>Website</label><input type="text" id="edit-website" placeholder="https://" /></div>
+    </div>
+    <div class="form-group"><label>Header Song / Vibe</label><input type="text" id="edit-song" placeholder="What song represents you?" /></div>
+    <div class="form-group">
+      <label>Profile Color</label>
+      <div class="color-options" id="profile-color-options">
+        <button class="color-dot active" data-color="#6366f1" style="background:#6366f1"></button>
+        <button class="color-dot" data-color="#ec4899" style="background:#ec4899"></button>
+        <button class="color-dot" data-color="#f59e0b" style="background:#f59e0b"></button>
+        <button class="color-dot" data-color="#10b981" style="background:#10b981"></button>
+        <button class="color-dot" data-color="#3b82f6" style="background:#3b82f6"></button>
+        <button class="color-dot" data-color="#ef4444" style="background:#ef4444"></button>
+        <button class="color-dot" data-color="#8b5cf6" style="background:#8b5cf6"></button>
+        <button class="color-dot" data-color="#ff6b35" style="background:#ff6b35"></button>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" id="cancel-edit-profile">Cancel</button>
+      <button class="btn btn-primary" id="save-edit-profile">Save Profile</button>
+    </div>
+  </div>
+</div>
+
+<!-- Comments Modal -->
+<div class="modal-overlay hidden" id="comments-modal">
+  <div class="modal">
+    <div class="modal-header"><h3>Comments</h3><button class="modal-close" id="close-comments">✕</button></div>
+    <div id="comments-list"></div>
+    <div class="comment-composer">
+      <input type="text" id="comment-input" placeholder="Add a comment..." />
+      <button class="btn btn-primary btn-sm" id="submit-comment">Post</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast hidden" id="toast"></div>
+<script src="/static/nexus_app.js"></script>
+</body>
+</html>
