@@ -153,6 +153,10 @@ def format_user(user):
 def index():
     return send_from_directory('static', 'nexus_app.html')
 
+@app.route('/static/<path:filename>')
+def static_files(filename):
+    return send_from_directory('static', filename)
+
 @app.route('/api/me')
 def me():
     if 'user_id' in session:
