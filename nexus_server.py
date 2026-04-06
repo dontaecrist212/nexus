@@ -151,7 +151,7 @@ def format_user(user):
 
 @app.route('/')
 def index():
-    return send_from_directory('static', 'nexus_app.html')
+    return send_from_directory('static', 'nexus_combined.html')
 
 @app.route('/static/<path:filename>')
 def static_files(filename):
