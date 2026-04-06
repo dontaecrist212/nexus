@@ -1392,3 +1392,99 @@ textarea { resize: vertical; min-height: 80px; }
   .top8-grid { grid-template-columns: repeat(4, 1fr); }
   .hero-stats { gap: 2rem; }
 }
+
+/* ===== PILLARS (replaces feat cards) ===== */
+.land-pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  border-top: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+  position: relative;
+  z-index: 1;
+}
+
+.pillar {
+  padding: 2.5rem 2rem;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.pillar::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.pillar:hover { background: var(--hover); }
+.pillar:hover::before { opacity: 1; }
+
+.pillar-num {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--accent2);
+  letter-spacing: 3px;
+  margin-bottom: 1rem;
+  opacity: 0.6;
+}
+
+.pillar-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin-bottom: 0.8rem;
+  color: var(--text);
+}
+
+.pillar-desc {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.7;
+}
+
+/* ===== STATEMENT SECTION ===== */
+.land-statement {
+  text-align: center;
+  padding: 6rem 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.statement-line {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 800;
+  letter-spacing: -2px;
+  line-height: 1.1;
+  color: var(--text2);
+  opacity: 0.4;
+}
+
+.statement-line.gradient-text {
+  background: linear-gradient(135deg, var(--accent2), var(--accent3));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: 1;
+  filter: drop-shadow(0 0 30px var(--accent-glow));
+}
+
+@media (max-width: 768px) {
+  .land-pillars { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 1024px) {
+  .land-pillars { grid-template-columns: repeat(2, 1fr); }
+}
