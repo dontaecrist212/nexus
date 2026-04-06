@@ -1,0 +1,2427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXUS — Be Everything Online</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ===== NEXUS — REDESIGNED ===== */
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+:root {
+  --accent: #7c3aed;
+  --accent2: #a855f7;
+  --accent3: #06b6d4;
+  --accent-glow: rgba(124,58,237,0.4);
+  --accent2-glow: rgba(168,85,247,0.3);
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --radius: 14px;
+  --radius-sm: 8px;
+  --transition: all 0.2s ease;
+}
+
+body.dark {
+  --bg: #04040a;
+  --bg2: #080810;
+  --bg3: #0f0f1a;
+  --border: rgba(124,58,237,0.15);
+  --border2: rgba(255,255,255,0.06);
+  --text: #f0eeff;
+  --text2: #8878aa;
+  --text3: #4a4060;
+  --card: #0c0c18;
+  --card2: #111120;
+  --hover: rgba(124,58,237,0.08);
+  --shadow: 0 8px 40px rgba(0,0,0,0.6);
+  --shadow-accent: 0 8px 40px rgba(124,58,237,0.2);
+}
+
+body.light {
+  --bg: #f5f3ff;
+  --bg2: #ffffff;
+  --bg3: #ede9fe;
+  --border: rgba(124,58,237,0.15);
+  --border2: rgba(0,0,0,0.06);
+  --text: #1e1030;
+  --text2: #6b5b8a;
+  --text3: #a090c0;
+  --card: #ffffff;
+  --card2: #f5f3ff;
+  --hover: rgba(124,58,237,0.05);
+  --shadow: 0 8px 40px rgba(124,58,237,0.1);
+  --shadow-accent: 0 8px 40px rgba(124,58,237,0.2);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* Grid background */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(124,58,237,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124,58,237,0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body.light::before {
+  background-image:
+    linear-gradient(rgba(124,58,237,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124,58,237,0.06) 1px, transparent 1px);
+}
+
+/* Radial glow */
+body::after {
+  content: '';
+  position: fixed;
+  top: -30%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 600px;
+  background: radial-gradient(ellipse, rgba(124,58,237,0.12) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===== LANDING ===== */
+#landing-screen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+}
+
+.land-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 2.5rem;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: rgba(4,4,10,0.8);
+  backdrop-filter: blur(20px);
+  z-index: 100;
+}
+
+body.light .land-nav { background: rgba(245,243,255,0.8); }
+
+.land-logo {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  color: var(--text);
+  text-shadow: 0 0 30px var(--accent-glow);
+}
+.land-logo span { color: var(--accent2); }
+
+.land-nav-right { display: flex; align-items: center; gap: 12px; }
+
+.land-hero {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 2rem 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated orbs */
+.land-hero::before {
+  content: '';
+  position: absolute;
+  top: 20%;
+  left: 15%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(124,58,237,0.15), transparent 70%);
+  border-radius: 50%;
+  animation: float1 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.land-hero::after {
+  content: '';
+  position: absolute;
+  bottom: 10%;
+  right: 15%;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(6,182,212,0.1), transparent 70%);
+  border-radius: 50%;
+  animation: float2 10s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes float1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(30px,-30px)} }
+@keyframes float2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-20px,20px)} }
+
+.hero-content {
+  text-align: center;
+  max-width: 780px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(124,58,237,0.1);
+  border: 1px solid rgba(124,58,237,0.3);
+  color: var(--accent2);
+  padding: 6px 18px;
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 9vw, 7rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -3px;
+  margin-bottom: 1.5rem;
+}
+
+.hero-title span {
+  background: linear-gradient(135deg, var(--accent2), var(--accent3));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 30px var(--accent-glow));
+}
+
+.hero-sub {
+  font-size: 1.15rem;
+  color: var(--text2);
+  line-height: 1.7;
+  max-width: 520px;
+  margin: 0 auto 3rem;
+  font-weight: 400;
+}
+
+.hero-btns {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 4rem;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 4rem;
+  justify-content: center;
+  padding-top: 3rem;
+  border-top: 1px solid var(--border);
+}
+
+.hero-stat span {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--accent2), var(--accent3));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: block;
+}
+
+.hero-stat label {
+  font-size: 11px;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 4px;
+  display: block;
+}
+
+.land-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  padding: 4rem 2.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.feat {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.6rem;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition);
+  cursor: default;
+}
+
+.feat::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.feat:hover {
+  border-color: rgba(124,58,237,0.4);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-accent);
+}
+
+.feat:hover::before { opacity: 1; }
+
+.feat-icon { font-size: 2.2rem; margin-bottom: 1rem; }
+
+.feat-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+}
+
+.feat-desc {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.6;
+}
+
+.land-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 0 2.5rem;
+}
+
+.land-footer {
+  text-align: center;
+  padding: 2rem;
+  font-size: 12px;
+  color: var(--text3);
+  border-top: 1px solid var(--border);
+  letter-spacing: 1px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== AUTH ===== */
+#auth-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.auth-container {
+  display: flex;
+  gap: 5rem;
+  align-items: center;
+  max-width: 860px;
+  width: 100%;
+}
+
+.auth-left { flex: 1; }
+
+.auth-logo {
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  font-weight: 800;
+  letter-spacing: -3px;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 40px var(--accent-glow);
+}
+.auth-logo span { color: var(--accent2); }
+
+.auth-tagline {
+  font-size: 1.2rem;
+  color: var(--text2);
+  line-height: 1.6;
+}
+
+.auth-box {
+  flex: 1;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: var(--shadow-accent);
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3));
+}
+
+.auth-tabs {
+  display: flex;
+  gap: 4px;
+  background: var(--bg3);
+  border-radius: var(--radius-sm);
+  padding: 4px;
+  margin-bottom: 1.5rem;
+}
+
+.auth-tab {
+  flex: 1;
+  padding: 9px;
+  border: none;
+  background: transparent;
+  color: var(--text2);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.auth-tab.active {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 2px 12px var(--accent-glow);
+}
+
+.auth-error {
+  background: rgba(239,68,68,0.1);
+  border: 1px solid rgba(239,68,68,0.3);
+  color: #f87171;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  margin-bottom: 1rem;
+}
+
+.auth-success {
+  background: rgba(16,185,129,0.1);
+  border: 1px solid rgba(16,185,129,0.3);
+  color: #34d399;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  margin-bottom: 1rem;
+}
+
+.auth-back {
+  text-align: center;
+  margin-top: 1.2rem;
+}
+
+.auth-back a {
+  font-size: 12px;
+  color: var(--text3);
+  cursor: pointer;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  transition: var(--transition);
+}
+
+.auth-back a:hover { color: var(--accent2); }
+
+/* ===== FORMS ===== */
+.form-group { margin-bottom: 1rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent2);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+input[type=text], input[type=password], input[type=datetime-local], textarea, select {
+  width: 100%;
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius-sm);
+  padding: 11px 14px;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 14px;
+  outline: none;
+  transition: var(--transition);
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+  background: var(--card);
+}
+
+textarea { resize: vertical; min-height: 80px; }
+
+/* ===== BUTTONS ===== */
+.btn {
+  padding: 10px 22px;
+  border-radius: var(--radius-sm);
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  letter-spacing: 0.3px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #fff;
+  box-shadow: 0 4px 16px var(--accent-glow);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--accent-glow);
+  filter: brightness(1.1);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text2);
+  border: 1px solid var(--border);
+}
+
+.btn-ghost:hover {
+  background: var(--hover);
+  color: var(--text);
+  border-color: var(--accent);
+}
+
+.btn-danger {
+  background: rgba(239,68,68,0.1);
+  color: #f87171;
+  border: 1px solid rgba(239,68,68,0.2);
+}
+
+.btn-danger:hover { background: rgba(239,68,68,0.2); }
+
+.btn-lg { padding: 14px 32px; font-size: 15px; border-radius: var(--radius); }
+.btn-sm { padding: 7px 16px; font-size: 13px; }
+.btn-xs { padding: 4px 10px; font-size: 12px; }
+.btn-full { width: 100%; justify-content: center; }
+
+.theme-toggle {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: var(--transition);
+}
+
+.theme-toggle:hover { background: var(--hover); border-color: var(--accent); }
+
+/* ===== APP LAYOUT ===== */
+#app-screen {
+  display: grid;
+  grid-template-columns: 260px 1fr 300px;
+  min-height: 100vh;
+  max-width: 1500px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1.2rem;
+  border-right: 1px solid var(--border);
+  background: var(--bg2);
+}
+
+.sidebar-logo {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  padding: 0 0.5rem;
+  margin-bottom: 2.5rem;
+  text-shadow: 0 0 20px var(--accent-glow);
+}
+
+.sidebar-logo span { color: var(--accent2); }
+
+.sidebar-nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 14px;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: transparent;
+  color: var(--text2);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: left;
+  width: 100%;
+}
+
+.nav-item:hover {
+  background: var(--hover);
+  color: var(--text);
+}
+
+.nav-item.active {
+  background: linear-gradient(135deg, rgba(124,58,237,0.15), rgba(168,85,247,0.1));
+  color: var(--accent2);
+  font-weight: 600;
+  border: 1px solid rgba(124,58,237,0.2);
+}
+
+.nav-icon { font-size: 18px; }
+
+.sidebar-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.main-content {
+  padding: 1.5rem 2rem;
+  min-height: 100vh;
+  border-right: 1px solid var(--border);
+}
+
+.right-sidebar {
+  padding: 1.5rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background: var(--bg2);
+}
+
+.page { display: none; }
+.page.active { display: block; }
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.page-header h2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.page-sub {
+  font-size: 11px;
+  color: var(--text3);
+  margin-left: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.search-bar { display: flex; gap: 8px; }
+.search-bar input { width: 220px; }
+
+/* ===== COMPOSER ===== */
+.composer {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.3rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  gap: 12px;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.composer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2), transparent);
+}
+
+.composer-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px var(--accent-glow);
+}
+
+.composer-body { flex: 1; }
+
+.composer-body textarea {
+  border: none;
+  background: transparent;
+  padding: 4px 0;
+  font-size: 15px;
+  min-height: 64px;
+  resize: none;
+  width: 100%;
+  color: var(--text);
+}
+
+.composer-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border2);
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.mood-picker { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.mood-label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 1px; }
+.mood-options { display: flex; gap: 4px; flex-wrap: wrap; }
+
+.mood-btn {
+  background: transparent;
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  padding: 4px 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: var(--transition);
+}
+
+.mood-btn:hover, .mood-btn.active {
+  background: rgba(124,58,237,0.1);
+  border-color: var(--accent);
+  transform: scale(1.1);
+}
+
+.composer-right { display: flex; align-items: center; gap: 10px; }
+.char-count { font-size: 12px; color: var(--text3); font-variant-numeric: tabular-nums; }
+
+/* ===== POSTS ===== */
+.post {
+  background: var(--card);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius);
+  padding: 1.3rem;
+  margin-bottom: 12px;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.post::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--accent), var(--accent2));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.post:hover {
+  border-color: rgba(124,58,237,0.25);
+  box-shadow: var(--shadow-accent);
+}
+
+.post:hover::before { opacity: 1; }
+
+.post-header { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
+
+.post-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.post-avatar:hover { transform: scale(1.08); }
+
+.post-meta { flex: 1; }
+
+.post-name {
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.post-name:hover { color: var(--accent2); }
+
+.post-username { font-size: 12px; color: var(--text3); margin-top: 1px; }
+.post-time { font-size: 12px; color: var(--text3); }
+.post-mood { font-size: 20px; margin-left: auto; }
+
+.post-content {
+  font-size: 15px;
+  line-height: 1.65;
+  margin-bottom: 14px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: var(--text);
+}
+
+.post-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+
+.post-action {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text3);
+  font-size: 13px;
+  font-family: var(--font-body);
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+  font-weight: 500;
+}
+
+.post-action:hover {
+  background: var(--hover);
+  color: var(--text);
+  border-color: var(--border);
+}
+
+.post-action.liked { color: #f472b6; }
+.post-action.liked:hover { background: rgba(244,114,182,0.1); border-color: rgba(244,114,182,0.3); }
+.post-delete { margin-left: auto; }
+.post-delete:hover { color: #f87171 !important; background: rgba(239,68,68,0.1) !important; }
+
+.empty-feed {
+  text-align: center;
+  padding: 5rem 2rem;
+  color: var(--text3);
+}
+
+.empty-feed .empty-icon { font-size: 3.5rem; margin-bottom: 1rem; }
+.empty-feed h3 { font-family: var(--font-display); font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--text2); font-weight: 700; }
+.empty-feed p { font-size: 14px; color: var(--text3); }
+
+/* ===== PROFILE ===== */
+.profile-header {
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-accent);
+}
+
+.profile-banner {
+  height: 160px;
+  display: flex;
+  align-items: flex-end;
+  padding: 1rem 1.5rem;
+  position: relative;
+}
+
+.profile-banner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.4));
+}
+
+.profile-banner-song {
+  font-size: 12px;
+  color: rgba(255,255,255,0.8);
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(8px);
+  padding: 5px 12px;
+  border-radius: 99px;
+  position: relative;
+  z-index: 1;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.profile-info {
+  background: var(--card);
+  padding: 1rem 1.5rem 1.5rem;
+}
+
+.profile-avatar-wrap {
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+  margin-top: -36px;
+  margin-bottom: 1rem;
+}
+
+.profile-avatar {
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 38px;
+  border: 3px solid var(--card);
+  flex-shrink: 0;
+  box-shadow: 0 4px 20px var(--accent-glow);
+}
+
+.profile-actions { margin-left: auto; display: flex; gap: 8px; }
+
+.profile-name {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.profile-handle { font-size: 14px; color: var(--text3); margin-bottom: 8px; }
+.profile-bio { font-size: 14px; color: var(--text2); line-height: 1.6; margin-bottom: 10px; }
+
+.profile-meta {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: var(--text3);
+  margin-bottom: 14px;
+}
+
+.profile-stats { display: flex; gap: 24px; }
+
+.profile-stat strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--accent2), var(--accent3));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.profile-stat span { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 1px; }
+
+.top8-section {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.3rem;
+  margin-bottom: 1.5rem;
+}
+
+.top8-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  font-size: 13px;
+  color: var(--accent2);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.top8-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 8px;
+}
+
+.top8-slot { text-align: center; }
+
+.top8-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin: 0 auto 4px;
+  border: 2px solid var(--border);
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.top8-avatar:hover { border-color: var(--accent2); transform: scale(1.1); box-shadow: 0 4px 16px var(--accent-glow); }
+.top8-avatar.empty { background: var(--bg3); color: var(--text3); font-size: 16px; }
+.top8-name { font-size: 10px; color: var(--text3); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* ===== WORLDS ===== */
+.worlds-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.world-card {
+  background: var(--card);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius);
+  padding: 1.3rem;
+  transition: var(--transition);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.world-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.world-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-accent);
+  border-color: rgba(124,58,237,0.3);
+}
+
+.world-card:hover::before { opacity: 1; }
+
+.world-header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.world-emoji { font-size: 2.2rem; }
+.world-name { font-family: var(--font-display); font-weight: 700; font-size: 1rem; }
+.world-desc { font-size: 13px; color: var(--text2); line-height: 1.5; margin-bottom: 14px; }
+.world-footer { display: flex; align-items: center; justify-content: space-between; }
+.world-members { font-size: 12px; color: var(--text3); }
+
+/* ===== EVENTS ===== */
+.events-list { display: flex; flex-direction: column; gap: 12px; }
+
+.event-card {
+  background: var(--card);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius);
+  padding: 1.3rem;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  transition: var(--transition);
+}
+
+.event-card:hover {
+  border-color: rgba(124,58,237,0.25);
+  box-shadow: var(--shadow-accent);
+}
+
+.event-date-block {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #fff;
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  text-align: center;
+  min-width: 60px;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px var(--accent-glow);
+}
+
+.event-date-day { font-family: var(--font-display); font-size: 1.5rem; font-weight: 800; line-height: 1; }
+.event-date-month { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+.event-body { flex: 1; }
+.event-title { font-family: var(--font-display); font-weight: 700; font-size: 1rem; margin-bottom: 4px; }
+.event-desc { font-size: 13px; color: var(--text2); margin-bottom: 8px; line-height: 1.5; }
+.event-meta { display: flex; gap: 12px; font-size: 12px; color: var(--text3); flex-wrap: wrap; }
+.event-actions { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
+.event-emoji { font-size: 2.2rem; flex-shrink: 0; }
+
+/* ===== WIDGETS ===== */
+.widget {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.widget::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2), transparent);
+}
+
+.widget-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 11px;
+  margin-bottom: 1rem;
+  color: var(--accent2);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.suggest-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border2);
+}
+
+.suggest-user:last-child { border-bottom: none; }
+
+.suggest-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.suggest-info { flex: 1; min-width: 0; }
+.suggest-name { font-weight: 600; font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; cursor: pointer; }
+.suggest-name:hover { color: var(--accent2); }
+.suggest-handle { font-size: 11px; color: var(--text3); }
+
+.sidebar-world {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border2);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.sidebar-world:last-child { border-bottom: none; }
+.sidebar-world:hover .sidebar-world-name { color: var(--accent2); }
+.sidebar-world-emoji { font-size: 1.3rem; }
+.sidebar-world-name { font-size: 13px; font-weight: 500; flex: 1; }
+.sidebar-world-members { font-size: 11px; color: var(--text3); }
+
+/* ===== MODALS ===== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(12px);
+  padding: 1rem;
+}
+
+.modal {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.8rem;
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  animation: slideUp 0.25s ease;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(124,58,237,0.1);
+}
+
+.modal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3));
+}
+
+.modal-wide { max-width: 640px; }
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.modal-header h3 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.1rem;
+  letter-spacing: -0.3px;
+}
+
+.modal-close {
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  color: var(--text3);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+}
+
+.modal-close:hover { color: var(--text); background: var(--hover); border-color: var(--accent); }
+.modal-footer { display: flex; justify-content: flex-end; gap: 10px; margin-top: 1.5rem; }
+
+.color-options { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.color-dot {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.color-dot.active {
+  border-color: var(--text);
+  transform: scale(1.2);
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+
+.color-dot:hover { transform: scale(1.1); }
+
+/* ===== COMMENTS ===== */
+.comment {
+  display: flex;
+  gap: 10px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border2);
+}
+
+.comment:last-child { border-bottom: none; }
+
+.comment-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.comment-body { flex: 1; }
+.comment-name { font-weight: 700; font-size: 13px; margin-bottom: 2px; }
+.comment-text { font-size: 14px; color: var(--text2); line-height: 1.5; }
+.comment-time { font-size: 11px; color: var(--text3); }
+
+.comment-composer {
+  display: flex;
+  gap: 8px;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.comment-composer input { flex: 1; }
+
+/* ===== TOAST ===== */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  z-index: 999;
+  box-shadow: var(--shadow-accent);
+  animation: slideUp 0.3s ease;
+}
+
+.toast.success { border-color: rgba(52,211,153,0.4); color: #34d399; }
+.toast.error { border-color: rgba(248,113,113,0.4); color: #f87171; }
+
+/* ===== PROFILE TABS ===== */
+.profile-tabs {
+  display: flex;
+  gap: 4px;
+  background: var(--bg3);
+  border-radius: var(--radius-sm);
+  padding: 4px;
+  margin-bottom: 1.5rem;
+}
+
+.profile-tab {
+  flex: 1;
+  padding: 9px;
+  border: none;
+  background: transparent;
+  color: var(--text2);
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: var(--font-body);
+}
+
+.profile-tab.active {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #fff;
+}
+
+/* ===== MODAL DESC ===== */
+.modal-desc { font-size: 13px; color: var(--text2); line-height: 1.6; margin-bottom: 1.2rem; }
+
+/* ===== UTILITIES ===== */
+.hidden { display: none !important; }
+.divider { height: 1px; background: var(--border); margin: 1rem 0; }
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent2); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1200px) {
+  .right-sidebar { display: none; }
+  #app-screen { grid-template-columns: 260px 1fr; }
+}
+
+@media (max-width: 768px) {
+  #app-screen { grid-template-columns: 1fr; }
+  .sidebar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: auto;
+    flex-direction: row;
+    z-index: 100;
+    border-top: 1px solid var(--border);
+    border-right: none;
+    padding: 0.5rem;
+    background: var(--bg2);
+  }
+  .sidebar-logo, .sidebar-bottom, .nav-label { display: none; }
+  .sidebar-nav { flex-direction: row; justify-content: space-around; }
+  .nav-item { justify-content: center; padding: 10px; }
+  .main-content { padding: 1rem; padding-bottom: 80px; }
+  .auth-container { flex-direction: column; gap: 2rem; }
+  .auth-left { text-align: center; }
+  .form-row { grid-template-columns: 1fr; }
+  .top8-grid { grid-template-columns: repeat(4, 1fr); }
+  .hero-stats { gap: 2rem; }
+}
+
+/* ===== PILLARS (replaces feat cards) ===== */
+.land-pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  border-top: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+  position: relative;
+  z-index: 1;
+}
+
+.pillar {
+  padding: 2.5rem 2rem;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.pillar::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.pillar:hover { background: var(--hover); }
+.pillar:hover::before { opacity: 1; }
+
+.pillar-num {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--accent2);
+  letter-spacing: 3px;
+  margin-bottom: 1rem;
+  opacity: 0.6;
+}
+
+.pillar-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin-bottom: 0.8rem;
+  color: var(--text);
+}
+
+.pillar-desc {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.7;
+}
+
+/* ===== STATEMENT SECTION ===== */
+.land-statement {
+  text-align: center;
+  padding: 6rem 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.statement-line {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 800;
+  letter-spacing: -2px;
+  line-height: 1.1;
+  color: var(--text2);
+  opacity: 0.4;
+}
+
+.statement-line.gradient-text {
+  background: linear-gradient(135deg, var(--accent2), var(--accent3));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: 1;
+  filter: drop-shadow(0 0 30px var(--accent-glow));
+}
+
+@media (max-width: 768px) {
+  .land-pillars { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 1024px) {
+  .land-pillars { grid-template-columns: repeat(2, 1fr); }
+}
+
+</style>
+</head>
+<body class="dark">
+
+<!-- LANDING -->
+<div id="landing-screen">
+  <nav class="land-nav">
+    <div class="land-logo">NEX<span>US</span></div>
+    <div class="land-nav-right">
+      <button class="theme-toggle" id="theme-toggle-land">☀️</button>
+      <button class="btn btn-ghost" id="land-login-btn">Sign In</button>
+      <button class="btn btn-primary" id="land-register-btn">Join Now</button>
+    </div>
+  </nav>
+  <div class="land-hero">
+    <div class="hero-content">
+      <div class="hero-badge">THE SOCIAL NETWORK REIMAGINED</div>
+      <h1 class="hero-title">Be <span>Everything</span><br>Online</h1>
+      <p class="hero-sub">Your profile. Your world. Your rules. No algorithm. No noise. Just you and the people you choose.</p>
+      <div class="hero-btns">
+        <button class="btn btn-primary btn-lg" id="hero-register-btn">Create Your World →</button>
+        <button class="btn btn-ghost btn-lg" id="hero-login-btn">Sign In</button>
+      </div>
+    </div>
+  </div>
+  <div class="land-pillars">
+    <div class="pillar">
+      <div class="pillar-num">01</div>
+      <div class="pillar-title">Worlds</div>
+      <div class="pillar-desc">Join or create communities built around anything. Your people are already here.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">02</div>
+      <div class="pillar-title">Top 8</div>
+      <div class="pillar-desc">The MySpace era brought back. Feature the people that matter most to you.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">03</div>
+      <div class="pillar-title">Live Feed</div>
+      <div class="pillar-desc">Chronological. No algorithm deciding what you see. Pure and unfiltered.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">04</div>
+      <div class="pillar-title">Your Profile</div>
+      <div class="pillar-desc">Custom colors, themes, personality. Make it look like you — not everyone else.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">05</div>
+      <div class="pillar-title">Events</div>
+      <div class="pillar-desc">Create and discover what's happening in your community in real time.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">06</div>
+      <div class="pillar-title">Explore</div>
+      <div class="pillar-desc">Step outside your bubble. Discover posts and people you never knew existed.</div>
+    </div>
+  </div>
+  <div class="land-statement">
+    <div class="statement-line">No algorithm.</div>
+    <div class="statement-line">No ads.</div>
+    <div class="statement-line gradient-text">Just you.</div>
+  </div>
+  <footer class="land-footer">NEXUS · Be Everything Online · © 2026</footer>
+</div>
+
+<!-- AUTH -->
+<div id="auth-screen" class="hidden">
+  <div class="auth-container">
+    <div class="auth-left">
+      <div class="auth-logo">NEX<span>US</span></div>
+      <p class="auth-tagline">Your world starts here.</p>
+    </div>
+    <div class="auth-box">
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="tab-login">Sign In</button>
+        <button class="auth-tab" id="tab-register">Join</button>
+      </div>
+      <div class="auth-error hidden" id="auth-error"></div>
+      <div class="auth-success hidden" id="auth-success"></div>
+      <div id="login-fields">
+        <div class="form-group"><label>Username</label><input type="text" id="auth-username" placeholder="your username" /></div>
+        <div class="form-group"><label>Password</label><input type="password" id="auth-password" placeholder="••••••••" /></div>
+        <button class="btn btn-primary btn-full" id="auth-btn">Sign In</button>
+      </div>
+      <div id="register-fields" class="hidden">
+        <div class="form-group"><label>Display Name</label><input type="text" id="reg-display" placeholder="How you want to be known" /></div>
+        <div class="form-group"><label>Username</label><input type="text" id="reg-username" placeholder="unique username" /></div>
+        <div class="form-group"><label>Password</label><input type="password" id="reg-password" placeholder="min 6 characters" /></div>
+        <button class="btn btn-primary btn-full" id="reg-btn">Create Account</button>
+      </div>
+      <div class="auth-back"><a id="back-to-land">← Back to home</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="app-screen" class="hidden">
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">NEX<span>US</span></div>
+    <nav class="sidebar-nav">
+      <button class="nav-item active" data-page="feed" id="nav-feed">
+        <span class="nav-icon">⚡</span><span class="nav-label">Feed</span>
+      </button>
+      <button class="nav-item" data-page="explore" id="nav-explore">
+        <span class="nav-icon">🔍</span><span class="nav-label">Explore</span>
+      </button>
+      <button class="nav-item" data-page="worlds" id="nav-worlds">
+        <span class="nav-icon">🌍</span><span class="nav-label">Worlds</span>
+      </button>
+      <button class="nav-item" data-page="events" id="nav-events">
+        <span class="nav-icon">📅</span><span class="nav-label">Events</span>
+      </button>
+      <button class="nav-item" data-page="profile" id="nav-profile">
+        <span class="nav-icon">👤</span><span class="nav-label">Profile</span>
+      </button>
+    </nav>
+    <div class="sidebar-bottom">
+      <button class="theme-toggle" id="theme-toggle-app">🌙</button>
+      <button class="btn btn-ghost btn-sm" id="logout-btn">Sign Out</button>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+    <!-- FEED PAGE -->
+    <div class="page active" id="page-feed">
+      <div class="page-header">
+        <h2>Your Feed</h2>
+        <span class="page-sub">Chronological · No Algorithm</span>
+      </div>
+      <div class="composer" id="composer">
+        <div class="composer-avatar" id="composer-avatar">👤</div>
+        <div class="composer-body">
+          <textarea id="post-content" placeholder="What's on your mind?" maxlength="500"></textarea>
+          <div class="composer-footer">
+            <div class="mood-picker">
+              <span class="mood-label">Mood:</span>
+              <div class="mood-options" id="mood-options">
+                <button class="mood-btn active" data-mood="">—</button>
+                <button class="mood-btn" data-mood="😊">😊</button>
+                <button class="mood-btn" data-mood="🔥">🔥</button>
+                <button class="mood-btn" data-mood="💭">💭</button>
+                <button class="mood-btn" data-mood="😤">😤</button>
+                <button class="mood-btn" data-mood="🎉">🎉</button>
+                <button class="mood-btn" data-mood="💀">💀</button>
+                <button class="mood-btn" data-mood="🫶">🫶</button>
+              </div>
+            </div>
+            <div class="composer-right">
+              <span class="char-count" id="char-count">500</span>
+              <button class="btn btn-primary btn-sm" id="post-btn">Post</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="feed-posts"></div>
+    </div>
+
+    <!-- EXPLORE PAGE -->
+    <div class="page hidden" id="page-explore">
+      <div class="page-header">
+        <h2>Explore</h2>
+        <div class="search-bar">
+          <input type="text" id="search-input" placeholder="Search people..." />
+          <button class="btn btn-primary btn-sm" id="search-btn">Search</button>
+        </div>
+      </div>
+      <div id="search-results" class="hidden"></div>
+      <div id="explore-posts"></div>
+    </div>
+
+    <!-- WORLDS PAGE -->
+    <div class="page hidden" id="page-worlds">
+      <div class="page-header">
+        <h2>Worlds</h2>
+        <button class="btn btn-primary btn-sm" id="create-world-btn">+ Create World</button>
+      </div>
+      <div id="worlds-list"></div>
+    </div>
+
+    <!-- EVENTS PAGE -->
+    <div class="page hidden" id="page-events">
+      <div class="page-header">
+        <h2>Events</h2>
+        <button class="btn btn-primary btn-sm" id="create-event-btn">+ Create Event</button>
+      </div>
+      <div id="events-list"></div>
+    </div>
+
+    <!-- PROFILE PAGE -->
+    <div class="page hidden" id="page-profile">
+      <div id="profile-content"></div>
+    </div>
+  </main>
+
+  <!-- RIGHT SIDEBAR -->
+  <aside class="right-sidebar">
+    <div class="widget">
+      <div class="widget-title">Who to Follow</div>
+      <div id="suggested-users"></div>
+    </div>
+    <div class="widget">
+      <div class="widget-title">Active Worlds</div>
+      <div id="sidebar-worlds"></div>
+    </div>
+  </aside>
+</div>
+
+<!-- MODALS -->
+<!-- Create World Modal -->
+<div class="modal-overlay hidden" id="world-modal">
+  <div class="modal">
+    <div class="modal-header"><h3>Create a World</h3><button class="modal-close" id="close-world-modal">✕</button></div>
+    <div class="form-group"><label>World Name</label><input type="text" id="world-name" placeholder="Name your world" /></div>
+    <div class="form-group"><label>Description</label><textarea id="world-desc" placeholder="What's this world about?"></textarea></div>
+    <div class="form-group"><label>Emoji</label><input type="text" id="world-emoji" placeholder="🌍" maxlength="2" /></div>
+    <div class="form-group">
+      <label>Theme Color</label>
+      <div class="color-options" id="world-color-options">
+        <button class="color-dot active" data-color="#6366f1" style="background:#6366f1"></button>
+        <button class="color-dot" data-color="#ec4899" style="background:#ec4899"></button>
+        <button class="color-dot" data-color="#f59e0b" style="background:#f59e0b"></button>
+        <button class="color-dot" data-color="#10b981" style="background:#10b981"></button>
+        <button class="color-dot" data-color="#3b82f6" style="background:#3b82f6"></button>
+        <button class="color-dot" data-color="#ef4444" style="background:#ef4444"></button>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" id="cancel-world-btn">Cancel</button>
+      <button class="btn btn-primary" id="save-world-btn">Create World</button>
+    </div>
+  </div>
+</div>
+
+<!-- Create Event Modal -->
+<div class="modal-overlay hidden" id="event-modal">
+  <div class="modal">
+    <div class="modal-header"><h3>Create an Event</h3><button class="modal-close" id="close-event-modal">✕</button></div>
+    <div class="form-group"><label>Event Title</label><input type="text" id="event-title" placeholder="What's happening?" /></div>
+    <div class="form-group"><label>Description</label><textarea id="event-desc" placeholder="Tell people about it..."></textarea></div>
+    <div class="form-group"><label>Location</label><input type="text" id="event-location" placeholder="Where is it?" /></div>
+    <div class="form-group"><label>Date & Time</label><input type="datetime-local" id="event-date" /></div>
+    <div class="form-group"><label>Emoji</label><input type="text" id="event-emoji" placeholder="📅" maxlength="2" /></div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" id="cancel-event-btn">Cancel</button>
+      <button class="btn btn-primary" id="save-event-btn">Create Event</button>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Profile Modal -->
+<div class="modal-overlay hidden" id="edit-profile-modal">
+  <div class="modal modal-wide">
+    <div class="modal-header"><h3>Edit Profile</h3><button class="modal-close" id="close-edit-profile">✕</button></div>
+    <div class="form-row">
+      <div class="form-group"><label>Display Name</label><input type="text" id="edit-display-name" /></div>
+      <div class="form-group"><label>Avatar Emoji</label><input type="text" id="edit-avatar" maxlength="2" /></div>
+    </div>
+    <div class="form-group"><label>Bio</label><textarea id="edit-bio" placeholder="Tell people about yourself..." maxlength="200"></textarea></div>
+    <div class="form-row">
+      <div class="form-group"><label>Location</label><input type="text" id="edit-location" placeholder="Where are you?" /></div>
+      <div class="form-group"><label>Website</label><input type="text" id="edit-website" placeholder="https://" /></div>
+    </div>
+    <div class="form-group"><label>Header Song / Vibe</label><input type="text" id="edit-song" placeholder="What song represents you?" /></div>
+    <div class="form-group">
+      <label>Profile Color</label>
+      <div class="color-options" id="profile-color-options">
+        <button class="color-dot active" data-color="#6366f1" style="background:#6366f1"></button>
+        <button class="color-dot" data-color="#ec4899" style="background:#ec4899"></button>
+        <button class="color-dot" data-color="#f59e0b" style="background:#f59e0b"></button>
+        <button class="color-dot" data-color="#10b981" style="background:#10b981"></button>
+        <button class="color-dot" data-color="#3b82f6" style="background:#3b82f6"></button>
+        <button class="color-dot" data-color="#ef4444" style="background:#ef4444"></button>
+        <button class="color-dot" data-color="#8b5cf6" style="background:#8b5cf6"></button>
+        <button class="color-dot" data-color="#ff6b35" style="background:#ff6b35"></button>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" id="cancel-edit-profile">Cancel</button>
+      <button class="btn btn-primary" id="save-edit-profile">Save Profile</button>
+    </div>
+  </div>
+</div>
+
+<!-- Comments Modal -->
+<div class="modal-overlay hidden" id="comments-modal">
+  <div class="modal">
+    <div class="modal-header"><h3>Comments</h3><button class="modal-close" id="close-comments">✕</button></div>
+    <div id="comments-list"></div>
+    <div class="comment-composer">
+      <input type="text" id="comment-input" placeholder="Add a comment..." />
+      <button class="btn btn-primary btn-sm" id="submit-comment">Post</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast hidden" id="toast"></div>
+<script>
+// ===== NEXUS APP =====
+let currentUser = null;
+let currentPage = 'feed';
+let selectedMood = '';
+let selectedWorldColor = '#6366f1';
+let selectedProfileColor = '#6366f1';
+let activeCommentPostId = null;
+
+// ===== UTILS =====
+function show(id) { const el = document.getElementById(id); if (el) { el.classList.remove('hidden'); } }
+function hide(id) { const el = document.getElementById(id); if (el) { el.classList.add('hidden'); } }
+function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function timeAgo(dateStr) {
+  const d = new Date(dateStr), now = new Date();
+  const diff = Math.floor((now - d) / 1000);
+  if (diff < 60) return `${diff}s ago`;
+  if (diff < 3600) return `${Math.floor(diff/60)}m ago`;
+  if (diff < 86400) return `${Math.floor(diff/3600)}h ago`;
+  return `${Math.floor(diff/86400)}d ago`;
+}
+function showToast(msg, type='success') {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.className = `toast ${type}`;
+  show('toast'); setTimeout(() => hide('toast'), 3000);
+}
+
+// ===== THEME =====
+let isDark = localStorage.getItem('nexus-theme') !== 'light';
+function applyTheme() {
+  document.body.className = isDark ? 'dark' : 'light';
+  document.querySelectorAll('.theme-toggle').forEach(btn => btn.textContent = isDark ? '☀️' : '🌙');
+  localStorage.setItem('nexus-theme', isDark ? 'dark' : 'light');
+}
+function toggleTheme() { isDark = !isDark; applyTheme(); }
+applyTheme();
+
+// ===== SESSION =====
+async function checkSession() {
+  const res = await fetch('/api/me');
+  const data = await res.json();
+  if (data.logged_in) {
+    currentUser = data;
+    showApp();
+  } else {
+    showLanding();
+  }
+}
+
+function showLanding() {
+  show('landing-screen');
+  hide('auth-screen');
+  hide('app-screen');
+}
+
+function showAuth(tab = 'login') {
+  hide('landing-screen');
+  show('auth-screen');
+  hide('app-screen');
+  switchAuthTab(tab);
+}
+
+function showApp() {
+  hide('landing-screen');
+  hide('auth-screen');
+  const appEl = document.getElementById('app-screen');
+  appEl.classList.remove('hidden');
+  appEl.style.display = 'grid';
+  updateComposerAvatar();
+  loadPage('feed');
+  loadSuggested();
+  loadSidebarWorlds();
+}
+
+function updateComposerAvatar() {
+  if (currentUser) {
+    const el = document.getElementById('composer-avatar');
+    if (el) {
+      el.textContent = currentUser.avatar_emoji || '👤';
+      el.style.background = currentUser.theme_color || '#6366f1';
+    }
+  }
+}
+
+// ===== AUTH =====
+function switchAuthTab(tab) {
+  document.getElementById('tab-login').classList.toggle('active', tab === 'login');
+  document.getElementById('tab-register').classList.toggle('active', tab === 'register');
+  document.getElementById('login-fields').classList.toggle('hidden', tab !== 'login');
+  document.getElementById('register-fields').classList.toggle('hidden', tab !== 'register');
+  hide('auth-error'); hide('auth-success');
+}
+
+function showAuthError(msg) { const el = document.getElementById('auth-error'); el.textContent = msg; show('auth-error'); }
+function showAuthSuccess(msg) { const el = document.getElementById('auth-success'); el.textContent = msg; show('auth-success'); }
+
+async function doLogin() {
+  const username = document.getElementById('auth-username').value.trim();
+  const password = document.getElementById('auth-password').value;
+  if (!username || !password) { showAuthError('All fields required'); return; }
+  const res = await fetch('/api/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username, password }) });
+  const data = await res.json();
+  if (!res.ok) { showAuthError(data.error); return; }
+  const me = await (await fetch('/api/me')).json();
+  currentUser = me;
+  showApp();
+}
+
+async function doRegister() {
+  const display_name = document.getElementById('reg-display').value.trim();
+  const username = document.getElementById('reg-username').value.trim();
+  const password = document.getElementById('reg-password').value;
+  if (!username || !password) { showAuthError('All fields required'); return; }
+  const res = await fetch('/api/register', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username, password, display_name }) });
+  const data = await res.json();
+  if (!res.ok) { showAuthError(data.error); return; }
+  const me = await (await fetch('/api/me')).json();
+  currentUser = me;
+  showApp();
+}
+
+async function doLogout() {
+  await fetch('/api/logout', { method: 'POST' });
+  currentUser = null;
+  showLanding();
+}
+
+// ===== NAVIGATION =====
+function loadPage(page) {
+  currentPage = page;
+  document.querySelectorAll('.page').forEach(p => { p.classList.remove('active'); p.classList.add('hidden'); });
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const pageEl = document.getElementById(`page-${page}`);
+  if (pageEl) { pageEl.classList.remove('hidden'); pageEl.classList.add('active'); }
+  const navEl = document.getElementById(`nav-${page}`);
+  if (navEl) navEl.classList.add('active');
+  if (page === 'feed') loadFeed();
+  else if (page === 'explore') loadExplore();
+  else if (page === 'worlds') loadWorlds();
+  else if (page === 'events') loadEvents();
+  else if (page === 'profile') loadMyProfile();
+}
+
+// ===== FEED =====
+async function loadFeed() {
+  const container = document.getElementById('feed-posts');
+  container.innerHTML = '<div class="empty-feed"><div class="empty-icon">⚡</div><p>Loading feed...</p></div>';
+  const res = await fetch('/api/feed');
+  if (res.status === 401) { showAuth(); return; }
+  const posts = await res.json();
+  if (!posts.length) {
+    container.innerHTML = `<div class="empty-feed"><div class="empty-icon">🌍</div><h3>Your feed is empty</h3><p>Follow some people or post something to get started!</p></div>`;
+    return;
+  }
+  container.innerHTML = posts.map(p => renderPost(p)).join('');
+  attachPostListeners(container);
+}
+
+function renderPost(p, showDelete = null) {
+  const canDelete = showDelete !== null ? showDelete : (currentUser && p.user_id === currentUser.id);
+  return `<div class="post" id="post-${p.id}" data-id="${p.id}">
+    <div class="post-header">
+      <div class="post-avatar" style="background:${p.theme_color||'#6366f1'}" data-username="${esc(p.username)}">${esc(p.avatar_emoji||'👤')}</div>
+      <div class="post-meta">
+        <div class="post-name" data-username="${esc(p.username)}">${esc(p.display_name||p.username)}</div>
+        <div class="post-username">@${esc(p.username)} · <span class="post-time">${timeAgo(p.created_at)}</span></div>
+      </div>
+      ${p.mood ? `<div class="post-mood">${esc(p.mood)}</div>` : ''}
+    </div>
+    <div class="post-content">${esc(p.content)}</div>
+    <div class="post-actions">
+      <button class="post-action like-btn ${p.liked?'liked':''}" data-id="${p.id}">
+        ${p.liked?'❤️':'🤍'} <span class="like-count">${p.like_count||0}</span>
+      </button>
+      <button class="post-action comment-btn" data-id="${p.id}">
+        💬 <span>${p.comment_count||0}</span>
+      </button>
+      ${canDelete ? `<button class="post-action post-delete delete-btn" data-id="${p.id}">🗑</button>` : ''}
+    </div>
+  </div>`;
+}
+
+function attachPostListeners(container) {
+  container.querySelectorAll('.like-btn').forEach(btn => btn.addEventListener('click', () => likePost(btn.dataset.id, btn)));
+  container.querySelectorAll('.comment-btn').forEach(btn => btn.addEventListener('click', () => openComments(btn.dataset.id)));
+  container.querySelectorAll('.delete-btn').forEach(btn => btn.addEventListener('click', () => deletePost(btn.dataset.id)));
+  container.querySelectorAll('.post-avatar, .post-name').forEach(el => el.addEventListener('click', () => loadUserProfile(el.dataset.username)));
+}
+
+async function likePost(postId, btn) {
+  const res = await fetch(`/api/posts/${postId}/like`, { method: 'POST' });
+  const data = await res.json();
+  btn.classList.toggle('liked', data.liked);
+  btn.innerHTML = `${data.liked?'❤️':'🤍'} <span class="like-count">${data.count}</span>`;
+}
+
+async function deletePost(postId) {
+  if (!confirm('Delete this post?')) return;
+  await fetch(`/api/posts/${postId}`, { method: 'DELETE' });
+  const el = document.getElementById(`post-${postId}`);
+  if (el) el.remove();
+  showToast('Post deleted');
+}
+
+async function submitPost() {
+  const content = document.getElementById('post-content').value.trim();
+  if (!content) { showToast('Write something first!', 'error'); return; }
+  const res = await fetch('/api/posts', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ content, mood: selectedMood }) });
+  if (!res.ok) { const d = await res.json(); showToast(d.error, 'error'); return; }
+  document.getElementById('post-content').value = '';
+  document.getElementById('char-count').textContent = '500';
+  selectedMood = '';
+  document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.mood-btn[data-mood=""]').classList.add('active');
+  showToast('Posted! ✨');
+  if (currentPage === 'feed') loadFeed();
+}
+
+// ===== COMMENTS =====
+async function openComments(postId) {
+  activeCommentPostId = postId;
+  show('comments-modal');
+  const res = await fetch(`/api/posts/${postId}/comments`);
+  const comments = await res.json();
+  const list = document.getElementById('comments-list');
+  if (!comments.length) {
+    list.innerHTML = '<p style="text-align:center;color:var(--text3);padding:1rem;font-size:13px;">No comments yet. Be the first!</p>';
+  } else {
+    list.innerHTML = comments.map(c => `
+      <div class="comment">
+        <div class="comment-avatar" style="background:${c.theme_color||'#6366f1'}">${esc(c.avatar_emoji||'👤')}</div>
+        <div class="comment-body">
+          <div class="comment-name">${esc(c.display_name||c.username)} <span class="comment-time" style="font-weight:normal;color:var(--text3)">· ${timeAgo(c.created_at)}</span></div>
+          <div class="comment-text">${esc(c.content)}</div>
+        </div>
+      </div>`).join('');
+  }
+}
+
+async function submitComment() {
+  if (!activeCommentPostId) return;
+  const input = document.getElementById('comment-input');
+  const content = input.value.trim();
+  if (!content) return;
+  const res = await fetch(`/api/posts/${activeCommentPostId}/comments`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ content }) });
+  if (!res.ok) { const d = await res.json(); showToast(d.error, 'error'); return; }
+  input.value = '';
+  await openComments(activeCommentPostId);
+  showToast('Comment added!');
+}
+
+// ===== EXPLORE =====
+async function loadExplore() {
+  const container = document.getElementById('explore-posts');
+  container.innerHTML = '<div class="empty-feed"><p>Loading...</p></div>';
+  const posts = await (await fetch('/api/explore')).json();
+  container.innerHTML = posts.map(p => renderPost(p)).join('') || '<div class="empty-feed"><div class="empty-icon">🔍</div><h3>Nothing here yet</h3></div>';
+  attachPostListeners(container);
+}
+
+async function searchUsers() {
+  const q = document.getElementById('search-input').value.trim();
+  if (!q) return;
+  const users = await (await fetch(`/api/search?q=${encodeURIComponent(q)}`)).json();
+  const container = document.getElementById('search-results');
+  show('search-results');
+  if (!users.length) { container.innerHTML = '<p style="color:var(--text3);font-size:13px;padding:1rem;">No users found</p>'; return; }
+  container.innerHTML = `<div style="display:flex;flex-direction:column;gap:8px;margin-bottom:1.5rem;">${users.map(u => `
+    <div style="display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:12px;cursor:pointer;" class="search-user-row" data-username="${esc(u.username)}">
+      <div style="width:40px;height:40px;border-radius:50%;background:${u.theme_color||'#6366f1'};display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">${esc(u.avatar_emoji||'👤')}</div>
+      <div>
+        <div style="font-weight:600;">${esc(u.display_name||u.username)}</div>
+        <div style="font-size:13px;color:var(--text3);">@${esc(u.username)}</div>
+        ${u.bio ? `<div style="font-size:12px;color:var(--text2);margin-top:2px;">${esc(u.bio)}</div>` : ''}
+      </div>
+    </div>`).join('')}</div>`;
+  container.querySelectorAll('.search-user-row').forEach(row => row.addEventListener('click', () => loadUserProfile(row.dataset.username)));
+}
+
+// ===== WORLDS =====
+async function loadWorlds() {
+  const container = document.getElementById('worlds-list');
+  const worlds = await (await fetch('/api/worlds')).json();
+  if (!worlds.length) {
+    container.innerHTML = '<div class="empty-feed"><div class="empty-icon">🌍</div><h3>No worlds yet</h3><p>Be the first to create one!</p></div>';
+    return;
+  }
+  container.innerHTML = `<div class="worlds-grid">${worlds.map(w => `
+    <div class="world-card">
+      <div class="world-header">
+        <div class="world-emoji">${esc(w.emoji||'🌍')}</div>
+        <div>
+          <div class="world-name" style="color:${w.theme_color||'var(--accent)'}">${esc(w.name)}</div>
+          <div style="font-size:12px;color:var(--text3);">by @${esc(w.creator_name)}</div>
+        </div>
+      </div>
+      <div class="world-desc">${esc(w.description||'No description')}</div>
+      <div class="world-footer">
+        <span class="world-members">👥 ${w.member_count} members</span>
+        <button class="btn ${w.is_member?'btn-ghost':'btn-primary'} btn-sm join-world-btn" data-id="${w.id}" data-joined="${w.is_member}">
+          ${w.is_member ? 'Leave' : 'Join'}
+        </button>
+      </div>
+    </div>`).join('')}</div>`;
+  container.querySelectorAll('.join-world-btn').forEach(btn => btn.addEventListener('click', async () => {
+    const res = await fetch(`/api/worlds/${btn.dataset.id}/join`, { method: 'POST' });
+    const data = await res.json();
+    showToast(data.joined ? 'Joined world! 🌍' : 'Left world');
+    loadWorlds();
+  }));
+}
+
+async function createWorld() {
+  const name = document.getElementById('world-name').value.trim();
+  const description = document.getElementById('world-desc').value.trim();
+  const emoji = document.getElementById('world-emoji').value.trim() || '🌍';
+  if (!name) { showToast('World name required', 'error'); return; }
+  const res = await fetch('/api/worlds', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name, description, emoji, theme_color: selectedWorldColor }) });
+  if (!res.ok) { const d = await res.json(); showToast(d.error, 'error'); return; }
+  hide('world-modal');
+  showToast('World created! 🌍');
+  loadWorlds();
+  loadSidebarWorlds();
+}
+
+// ===== EVENTS =====
+async function loadEvents() {
+  const container = document.getElementById('events-list');
+  const events = await (await fetch('/api/events')).json();
+  if (!events.length) {
+    container.innerHTML = '<div class="empty-feed"><div class="empty-icon">📅</div><h3>No events yet</h3><p>Create the first one!</p></div>';
+    return;
+  }
+  container.innerHTML = `<div class="events-list">${events.map(ev => {
+    const d = ev.event_date ? new Date(ev.event_date) : null;
+    return `<div class="event-card">
+      <div class="event-emoji">${esc(ev.emoji||'📅')}</div>
+      ${d ? `<div class="event-date-block"><div class="event-date-day">${d.getDate()}</div><div class="event-date-month">${d.toLocaleString('default',{month:'short'})}</div></div>` : ''}
+      <div class="event-body">
+        <div class="event-title">${esc(ev.title)}</div>
+        ${ev.description ? `<div class="event-desc">${esc(ev.description)}</div>` : ''}
+        <div class="event-meta">
+          ${ev.location ? `<span>📍 ${esc(ev.location)}</span>` : ''}
+          ${d ? `<span>🕐 ${d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</span>` : ''}
+          <span>👥 ${ev.going_count} going</span>
+          <span>by @${esc(ev.creator_name)}</span>
+        </div>
+      </div>
+      <div class="event-actions">
+        <button class="btn ${ev.is_going?'btn-ghost':'btn-primary'} btn-sm rsvp-btn" data-id="${ev.id}">
+          ${ev.is_going ? '✓ Going' : 'RSVP'}
+        </button>
+      </div>
+    </div>`;
+  }).join('')}</div>`;
+  container.querySelectorAll('.rsvp-btn').forEach(btn => btn.addEventListener('click', async () => {
+    const res = await fetch(`/api/events/${btn.dataset.id}/rsvp`, { method: 'POST' });
+    const data = await res.json();
+    showToast(data.going ? "You're going! 🎉" : 'RSVP cancelled');
+    loadEvents();
+  }));
+}
+
+async function createEvent() {
+  const title = document.getElementById('event-title').value.trim();
+  const description = document.getElementById('event-desc').value.trim();
+  const location = document.getElementById('event-location').value.trim();
+  const event_date = document.getElementById('event-date').value;
+  const emoji = document.getElementById('event-emoji').value.trim() || '📅';
+  if (!title) { showToast('Event title required', 'error'); return; }
+  const res = await fetch('/api/events', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ title, description, location, event_date, emoji }) });
+  if (!res.ok) { const d = await res.json(); showToast(d.error, 'error'); return; }
+  hide('event-modal');
+  showToast('Event created! 📅');
+  loadEvents();
+}
+
+// ===== PROFILE =====
+async function loadMyProfile() {
+  if (!currentUser) return;
+  await loadUserProfile(currentUser.username);
+}
+
+async function loadUserProfile(username) {
+  if (currentPage !== 'profile') {
+    loadPage('profile');
+    currentPage = 'profile';
+  }
+  const container = document.getElementById('profile-content');
+  container.innerHTML = '<div class="empty-feed"><p>Loading profile...</p></div>';
+  const user = await (await fetch(`/api/users/${username}`)).json();
+  if (user.error) { container.innerHTML = '<div class="empty-feed"><p>User not found</p></div>'; return; }
+  const isMe = currentUser && user.id === currentUser.id;
+  container.innerHTML = `
+    <div class="profile-header">
+      <div class="profile-banner" style="background:linear-gradient(135deg,${user.theme_color||'#6366f1'},${user.theme_color||'#6366f1'}88)">
+        ${user.header_song ? `<div class="profile-banner-song">🎵 ${esc(user.header_song)}</div>` : ''}
+      </div>
+      <div class="profile-info">
+        <div class="profile-avatar-wrap">
+          <div class="profile-avatar" style="background:${user.theme_color||'#6366f1'}">${esc(user.avatar_emoji||'👤')}</div>
+          <div class="profile-actions">
+            ${isMe ? `<button class="btn btn-ghost btn-sm" id="edit-profile-btn">Edit Profile</button>` :
+              `<button class="btn ${user.is_following?'btn-ghost':'btn-primary'} btn-sm follow-btn" data-id="${user.id}">
+                ${user.is_following ? 'Following' : 'Follow'}
+              </button>`}
+          </div>
+        </div>
+        <div class="profile-name">${esc(user.display_name||user.username)}</div>
+        <div class="profile-handle">@${esc(user.username)}</div>
+        ${user.bio ? `<div class="profile-bio">${esc(user.bio)}</div>` : ''}
+        <div class="profile-meta">
+          ${user.location ? `<span>📍 ${esc(user.location)}</span>` : ''}
+          ${user.website ? `<span>🔗 <a href="${esc(user.website)}" target="_blank" style="color:var(--accent)">${esc(user.website)}</a></span>` : ''}
+          <span>📅 Joined ${new Date(user.created_at).toLocaleDateString('default',{month:'long',year:'numeric'})}</span>
+        </div>
+        <div class="profile-stats">
+          <div class="profile-stat"><strong>${user.post_count||0}</strong><span>Posts</span></div>
+          <div class="profile-stat"><strong>${user.followers||0}</strong><span>Followers</span></div>
+          <div class="profile-stat"><strong>${user.following||0}</strong><span>Following</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="top8-section">
+      <div class="top8-title">👑 Top 8</div>
+      <div class="top8-grid" id="top8-grid">
+        ${[1,2,3,4,5,6,7,8].map(pos => {
+          const friend = user.top8 && user.top8.find(f => f.position === pos);
+          return `<div class="top8-slot">
+            <div class="top8-avatar ${friend?'':'empty'}" style="${friend?`background:${friend.theme_color||'#6366f1'}`:''}">
+              ${friend ? esc(friend.avatar_emoji||'👤') : '+'}
+            </div>
+            <div class="top8-name">${friend ? esc(friend.display_name||friend.username) : ''}</div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>
+    <div class="profile-tabs">
+      <button class="profile-tab active" id="posts-tab">Posts</button>
+    </div>
+    <div id="profile-posts"></div>`;
+
+  // Attach follow button
+  const followBtn = container.querySelector('.follow-btn');
+  if (followBtn) {
+    followBtn.addEventListener('click', async () => {
+      const res = await fetch(`/api/follow/${followBtn.dataset.id}`, { method: 'POST' });
+      const data = await res.json();
+      followBtn.textContent = data.following ? 'Following' : 'Follow';
+      followBtn.className = `btn ${data.following?'btn-ghost':'btn-primary'} btn-sm follow-btn`;
+      showToast(data.following ? `Following @${username}!` : `Unfollowed @${username}`);
+    });
+  }
+
+  // Edit profile button
+  const editBtn = container.querySelector('#edit-profile-btn');
+  if (editBtn) {
+    editBtn.addEventListener('click', () => openEditProfile());
+  }
+
+  // Load posts
+  const posts = await (await fetch(`/api/users/${username}/posts`)).json();
+  const postsContainer = document.getElementById('profile-posts');
+  postsContainer.innerHTML = posts.map(p => renderPost(p, isMe)).join('') ||
+    '<div class="empty-feed"><div class="empty-icon">✍️</div><h3>No posts yet</h3></div>';
+  attachPostListeners(postsContainer);
+}
+
+// ===== EDIT PROFILE =====
+function openEditProfile() {
+  if (!currentUser) return;
+  document.getElementById('edit-display-name').value = currentUser.display_name || '';
+  document.getElementById('edit-avatar').value = currentUser.avatar_emoji || '👤';
+  document.getElementById('edit-bio').value = currentUser.bio || '';
+  document.getElementById('edit-location').value = currentUser.location || '';
+  document.getElementById('edit-website').value = currentUser.website || '';
+  document.getElementById('edit-song').value = currentUser.header_song || '';
+  selectedProfileColor = currentUser.theme_color || '#6366f1';
+  document.querySelectorAll('#profile-color-options .color-dot').forEach(d => {
+    d.classList.toggle('active', d.dataset.color === selectedProfileColor);
+  });
+  show('edit-profile-modal');
+}
+
+async function saveProfile() {
+  const display_name = document.getElementById('edit-display-name').value.trim();
+  const avatar_emoji = document.getElementById('edit-avatar').value.trim() || '👤';
+  const bio = document.getElementById('edit-bio').value.trim();
+  const location = document.getElementById('edit-location').value.trim();
+  const website = document.getElementById('edit-website').value.trim();
+  const header_song = document.getElementById('edit-song').value.trim();
+  const res = await fetch('/api/profile', { method: 'PUT', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ display_name, avatar_emoji, bio, location, website, header_song, theme_color: selectedProfileColor }) });
+  if (!res.ok) { showToast('Failed to save', 'error'); return; }
+  const me = await (await fetch('/api/me')).json();
+  currentUser = me;
+  hide('edit-profile-modal');
+  showToast('Profile updated! ✨');
+  updateComposerAvatar();
+  loadMyProfile();
+}
+
+// ===== SIDEBAR WIDGETS =====
+async function loadSuggested() {
+  const res = await fetch('/api/explore');
+  if (!res.ok) return;
+  const posts = await res.json();
+  const seen = new Set();
+  const users = [];
+  for (const p of posts) {
+    if (!seen.has(p.user_id) && (!currentUser || p.user_id !== currentUser.id)) {
+      seen.add(p.user_id);
+      users.push(p);
+      if (users.length >= 5) break;
+    }
+  }
+  const container = document.getElementById('suggested-users');
+  container.innerHTML = users.map(u => `
+    <div class="suggest-user">
+      <div class="suggest-avatar" style="background:${u.theme_color||'#6366f1'}">${esc(u.avatar_emoji||'👤')}</div>
+      <div class="suggest-info">
+        <div class="suggest-name suggest-link" data-username="${esc(u.username)}">${esc(u.display_name||u.username)}</div>
+        <div class="suggest-handle">@${esc(u.username)}</div>
+      </div>
+      <button class="btn btn-primary btn-xs follow-suggest-btn" data-id="${u.user_id}">Follow</button>
+    </div>`).join('') || '<p style="font-size:13px;color:var(--text3);">No suggestions yet</p>';
+  container.querySelectorAll('.suggest-link').forEach(el => el.addEventListener('click', () => loadUserProfile(el.dataset.username)));
+  container.querySelectorAll('.follow-suggest-btn').forEach(btn => btn.addEventListener('click', async () => {
+    await fetch(`/api/follow/${btn.dataset.id}`, { method: 'POST' });
+    showToast('Followed!');
+    btn.textContent = '✓'; btn.disabled = true;
+  }));
+}
+
+async function loadSidebarWorlds() {
+  const worlds = await (await fetch('/api/worlds')).json();
+  const container = document.getElementById('sidebar-worlds');
+  container.innerHTML = worlds.slice(0,5).map(w => `
+    <div class="sidebar-world">
+      <div class="sidebar-world-emoji">${esc(w.emoji||'🌍')}</div>
+      <div class="sidebar-world-name">${esc(w.name)}</div>
+      <div class="sidebar-world-members">${w.member_count}</div>
+    </div>`).join('') || '<p style="font-size:13px;color:var(--text3);">No worlds yet</p>';
+  container.querySelectorAll('.sidebar-world').forEach((el, i) => el.addEventListener('click', () => loadPage('worlds')));
+}
+
+// ===== EVENT LISTENERS =====
+document.addEventListener('DOMContentLoaded', () => {
+  // Theme toggles
+  document.querySelectorAll('.theme-toggle').forEach(btn => btn.addEventListener('click', toggleTheme));
+
+  // Landing
+  document.getElementById('land-login-btn').addEventListener('click', () => showAuth('login'));
+  document.getElementById('land-register-btn').addEventListener('click', () => showAuth('register'));
+  document.getElementById('hero-login-btn').addEventListener('click', () => showAuth('login'));
+  document.getElementById('hero-register-btn').addEventListener('click', () => showAuth('register'));
+
+  // Auth
+  document.getElementById('tab-login').addEventListener('click', () => switchAuthTab('login'));
+  document.getElementById('tab-register').addEventListener('click', () => switchAuthTab('register'));
+  document.getElementById('auth-btn').addEventListener('click', doLogin);
+  document.getElementById('reg-btn').addEventListener('click', doRegister);
+  document.getElementById('back-to-land').addEventListener('click', showLanding);
+  document.getElementById('auth-username').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+  document.getElementById('auth-password').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+
+  // Nav
+  document.querySelectorAll('.nav-item').forEach(btn => btn.addEventListener('click', () => loadPage(btn.dataset.page)));
+  document.getElementById('logout-btn').addEventListener('click', doLogout);
+
+  // Post composer
+  document.getElementById('post-btn').addEventListener('click', submitPost);
+  document.getElementById('post-content').addEventListener('input', () => {
+    const len = document.getElementById('post-content').value.length;
+    document.getElementById('char-count').textContent = 500 - len;
+  });
+  document.getElementById('post-content').addEventListener('keydown', e => { if (e.key === 'Enter' && e.ctrlKey) submitPost(); });
+
+  // Mood picker
+  document.querySelectorAll('.mood-btn').forEach(btn => btn.addEventListener('click', () => {
+    selectedMood = btn.dataset.mood;
+    document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }));
+
+  // Search
+  document.getElementById('search-btn').addEventListener('click', searchUsers);
+  document.getElementById('search-input').addEventListener('keydown', e => { if (e.key === 'Enter') searchUsers(); });
+
+  // Worlds modal
+  document.getElementById('create-world-btn').addEventListener('click', () => show('world-modal'));
+  document.getElementById('close-world-modal').addEventListener('click', () => hide('world-modal'));
+  document.getElementById('cancel-world-btn').addEventListener('click', () => hide('world-modal'));
+  document.getElementById('save-world-btn').addEventListener('click', createWorld);
+  document.querySelectorAll('#world-color-options .color-dot').forEach(dot => dot.addEventListener('click', () => {
+    selectedWorldColor = dot.dataset.color;
+    document.querySelectorAll('#world-color-options .color-dot').forEach(d => d.classList.remove('active'));
+    dot.classList.add('active');
+  }));
+
+  // Events modal
+  document.getElementById('create-event-btn').addEventListener('click', () => show('event-modal'));
+  document.getElementById('close-event-modal').addEventListener('click', () => hide('event-modal'));
+  document.getElementById('cancel-event-btn').addEventListener('click', () => hide('event-modal'));
+  document.getElementById('save-event-btn').addEventListener('click', createEvent);
+
+  // Edit profile modal
+  document.getElementById('close-edit-profile').addEventListener('click', () => hide('edit-profile-modal'));
+  document.getElementById('cancel-edit-profile').addEventListener('click', () => hide('edit-profile-modal'));
+  document.getElementById('save-edit-profile').addEventListener('click', saveProfile);
+  document.querySelectorAll('#profile-color-options .color-dot').forEach(dot => dot.addEventListener('click', () => {
+    selectedProfileColor = dot.dataset.color;
+    document.querySelectorAll('#profile-color-options .color-dot').forEach(d => d.classList.remove('active'));
+    dot.classList.add('active');
+  }));
+
+  // Comments modal
+  document.getElementById('close-comments').addEventListener('click', () => hide('comments-modal'));
+  document.getElementById('submit-comment').addEventListener('click', submitComment);
+  document.getElementById('comment-input').addEventListener('keydown', e => { if (e.key === 'Enter') submitComment(); });
+
+  // Close modals on backdrop
+  document.querySelectorAll('.modal-overlay').forEach(m => m.addEventListener('click', e => { if (e.target === m) m.classList.add('hidden'); }));
+
+  checkSession();
+});
+
+</script>
+</body>
+</html>
